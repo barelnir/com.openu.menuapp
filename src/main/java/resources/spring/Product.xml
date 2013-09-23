@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+    <!-- Product business object -->
+   <bean id="productBo" class="com.openu.menuapp.bo.impl.ProductBoImpl" >
+   		<property name="productDao" ref="productDao" />
+   </bean>
+ 
+   <!-- Product Data Access Object -->
+   <bean id="productDao" class="com.openu.menuapp.dao.impl.ProductDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+</beans>

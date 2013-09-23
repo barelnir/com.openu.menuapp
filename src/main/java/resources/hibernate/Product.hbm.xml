@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.openu.menuapp.model.Product" table="products" catalog="menuappDB">
+        <id name="productId" type="java.lang.Long">
+            <column name="PRODUCT_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="productName" type="string">
+            <column name="PRODUCT_NAME" length="255" not-null="true" unique="true" />
+        </property>
+        <property name="productPrice" type="java.lang.Long">
+            <column name="PRODUCT_PRICE" length="10" not-null="true" unique="true" />
+        </property>
+        
+    </class>
+</hibernate-mapping>
