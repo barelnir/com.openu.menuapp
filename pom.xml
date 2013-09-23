@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.openu.menuapp</groupId>
+  
+  <artifactId>menuapp</artifactId>
+  
+  <packaging>jar</packaging>
+  
+  <version>1.0-SNAPSHOT</version>
+  
+  <name>menuapp</name>
+  
+  <url>http://maven.apache.org</url>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+              <resources>          
+                <resource>
+                  <directory>src/main/java/resources</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <repositories>
+  <repository>
+  	<id>com.springsource.repository.bundles.release</id>
+  	<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+  	<url>http://repository.springsource.com/maven/bundles/release</url>
+  </repository>
+  	
+  <repository>
+  	<id>com.springsource.repository.bundles.external</id>
+  	<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+  	<url>http://repository.springsource.com/maven/bundles/external</url>
+  </repository>
+  </repositories>
+  
+  
+  <properties>
+  	<junit.version>4.8.2</junit.version>
+  	<spring.version>3.2.3.RELEASE</spring.version>
+  	<cglib.version>2.2.2</cglib.version>
+  	<mysql.version>5.1.26</mysql.version>
+  	<hibernate.version>4.2.5.Final</hibernate.version>
+  </properties>
+  
+  <dependencies>
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    
+    <!-- Spring framework -->
+  	<dependency> <groupId>org.springframework</groupId> <artifactId>org.springframework.beans</artifactId> <version>3.2.3.RELEASE</version> </dependency>
+ 
+    <!-- Spring AOP dependency -->
+    <dependency>
+    	<groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>${cglib.version}</version>
+	</dependency>
+ 
+    <!-- MySQL database driver -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.version}</version>
+	</dependency>
+ 
+	<!-- Hibernate framework -->
+	<dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>${hibernate.version}</version>
+	</dependency>
+  
+	<!-- Hibernate library dependecy start -->
+	<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>org.antlr</groupId>
+		<artifactId>antlr</artifactId>
+		<version>3.5</version>
+	</dependency>
+	<!-- Hibernate library dependecy end -->
+	    
+  </dependencies>
+</project>
