@@ -62,13 +62,13 @@ public class UserServiceTest {
         //assertEquals((long)500, product.getProductPrice());
 
         user.setUserName("newUserName");
-        user.setPassword("123");
+        user.setPassword("a123");
         baseEntityService.saveOrUpdate(user);
 
         User found = baseEntityService.findByUUID(uuid);
         assertNotNull(found);
         assertEquals("newUserName", found.getUserName());
-        assertEquals(123, found.getPassword());
+        assertEquals("a123", found.getPassword());
 
 
 

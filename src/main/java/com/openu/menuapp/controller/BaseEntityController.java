@@ -17,7 +17,7 @@ import com.openu.menuapp.service.BaseEntityService;
 
 public class BaseEntityController {
 
-/*	 @Autowired
+	 /*@Autowired
     private BaseEntityService baseEntityService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -47,7 +47,7 @@ public class BaseEntityController {
 //    }
 
     @RequestMapping(value = "/edit/{uuid}", method = RequestMethod.GET)
-    public String updateBaseEntity(Model model, @PathVariable UUID uuid) {
+    public String updateBaseEntity(Model model, @PathVariable String uuid) {
         BaseEntity baseEntity = baseEntityService.findByUUID(uuid);
         model.addAttribute("baseEntity", baseEntity);
         return "update";
@@ -65,6 +65,6 @@ public class BaseEntityController {
 //        model.addAttribute("deleted", "success");
 //        model.addAttribute("product", new Product());
 //        return "index";
-//    }
-	*/
+//    }*/
+	
 }

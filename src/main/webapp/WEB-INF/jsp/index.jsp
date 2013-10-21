@@ -12,9 +12,9 @@
 <p class="error">Product Already Exist</p>
 </c:if>
 <form:form modelAttribute="product" action="/menuapp/create" method="post">
-<form:label path="productId">Product Name</form:label><form:input path="productId" />
-<form:label path="productName">First Name</form:label><form:input path="productName" />
-<form:label path="productPrice">Last Name</form:label><form:input path="productPrice" />
+<!--<form:label path="Uuid">Product Name</form:label><form:input path="Uuid" />-->
+<form:label path="productName">Name</form:label><form:input path="productName" />
+<form:label path="productPrice">Price</form:label><form:input path="productPrice" />
 <button type="submit" id="save">Save Product</button><button type="submit" id="search">Search Product</button>
 </form:form>
 </div>
@@ -34,11 +34,10 @@
 </c:if>
 <c:forEach var="current" items="${products}">
 <tr>
-<td>${current.productId}</td>
 <td>${current.productName}</td>
 <td>${current.productPrice}</td>
-<td><a href="/menuapp/edit/${current.productId}">Edit</a></td>
-<td><a href="/menuapp/delete/${current.productId}">Delete</a></td>
+<td><a href="/menuapp/edit/${current.Uuid}">Edit</a></td>
+<td><a href="/menuapp/delete/${current.Uuid}">Delete</a></td>
 </tr>
 </c:forEach>
 </table>
