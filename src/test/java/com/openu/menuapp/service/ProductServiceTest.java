@@ -1,14 +1,11 @@
 package com.openu.menuapp.service;
 
 import com.openu.menuapp.entity.Product;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -37,7 +34,7 @@ public class ProductServiceTest {
     static int i = 1;
     
     private String createProduct() {
-        Product product = new Product(UUID.randomUUID().toString(),"product0" + i++,(long)500);
+    	Product product = new Product("","product0" + i++,(long)500);
         baseEntityService.saveOrUpdate(product);
         return product.getUuid();
     }

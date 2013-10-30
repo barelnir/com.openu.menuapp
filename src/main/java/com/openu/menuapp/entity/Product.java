@@ -1,7 +1,5 @@
 package com.openu.menuapp.entity;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,17 +9,22 @@ import javax.persistence.Table;
 @Table (name = "products")
 public class Product extends BaseEntity{
 
-	@Column (name = "PRODUCT_NAME", nullable = false)
-	private String productName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4847600085055657001L;
+
+	@Column (nullable = false)
+	protected String productName;
 	
-	@Column (name = "PRODUCT_PRICE", nullable = false)
-	private long productPrice;
+	@Column (nullable = false)
+	protected long productPrice;
 		
 	/**
 	 * c'tor
 	 */
 	public Product() {
-		super();
+		super("");
 	}
 	
 	/**

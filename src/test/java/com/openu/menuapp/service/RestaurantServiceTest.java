@@ -1,7 +1,7 @@
 /**
  * menuapp
  * 8 баеч 2013 22:06:12
- * UserServiceTest.java
+ * RestaurantServiceTest.java
  *
  * Lior Negrin ID: 040829780
  * Nir Barel ID: 032483372
@@ -18,29 +18,33 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.openu.menuapp.entity.Address;
-import com.openu.menuapp.entity.SecurityRole;
-import com.openu.menuapp.entity.User;
+import com.openu.menuapp.entity.Dish;
+import com.openu.menuapp.entity.Restaurant;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/applicationContext.xml", "classpath:spring/hibernateContext.xml"})
-public class UserServiceTest {
+public class RestaurantServiceTest {
 
 	@Autowired
-    private UserService baseEntityService;
+    private RestaurantService baseEntityService;
+	private DishService dishService;
 	
 	@Test
     public void testSave() throws Exception {
     	String uuid = createObject();
-        User found = baseEntityService.findByUUID(uuid);
+        Restaurant found = baseEntityService.findByUUID(uuid);
         assertEquals(uuid, found.getUuid());
     }
 
     static int i = 1;
     
     private String createObject() {
-    	User user = new User("","nir","nir","Nir Barel",new Address("","Tel Aviv","Main",6,4,"CP",5,"2",323232),"054-2323232",new SecurityRole("","Admin"));
-        baseEntityService.saveOrUpdate(user);
-        return user.getUuid();
+    	Restaurant obj = new Restaurant("","La Gardia",new Address("","Tel Aviv","Main",6,4,"CP",5,"2",323232),"054-23325654","nir",true);
+        //Dish dish = new Dish("","habita","nice",50);
+        //dishService.saveOrUpdate(dish);
+        //obj.addDish(dish);
+    	baseEntityService.saveOrUpdate(obj);
+        return obj.getUuid();
     }
 	
     @Test
@@ -48,27 +52,18 @@ public class UserServiceTest {
     	String uuid = createObject();
         assertNotNull(baseEntityService.findByUUID(uuid));
         baseEntityService.delete(uuid);
-        //assertNull(baseEntityService.findByProductId("product01"));
     }
 
     @Test
     public void testUpdate() throws Exception {
     	String uuid = createObject();
-    	User user = baseEntityService.findByUUID(uuid);
-        assertNotNull(user);
-        //assertEquals("product0" + --i, product.getProductName());
-        //assertEquals((long)500, product.getProductPrice());
+    	Restaurant obj = baseEntityService.findByUUID(uuid);
+        assertNotNull(obj);
+        obj.setName("newUserName");
+        baseEntityService.saveOrUpdate(obj);
 
-        user.setUserName("newUserName");
-        user.setPassword("p123");
-        baseEntityService.saveOrUpdate(user);
-
-        User found = baseEntityService.findByUUID(uuid);
+        Restaurant found = baseEntityService.findByUUID(uuid);
         assertNotNull(found);
-        assertEquals("newUserName", found.getUserName());
-        assertEquals("p123", found.getPassword());
-
-
-
+        assertEquals("newUserName", found.getName());
     }
 }

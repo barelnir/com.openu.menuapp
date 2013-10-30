@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.openu.menuapp.dao.impl.ProductDaoImpl;
 import com.openu.menuapp.entity.BaseEntity;
 import com.openu.menuapp.entity.Product;
-import com.openu.menuapp.service.BaseEntityService;
 import com.openu.menuapp.service.ProductService;
 
 
@@ -21,18 +20,15 @@ public class ProductServiceImpl implements ProductService {
     private ProductDaoImpl productDao;
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public Product findByUUID(String uuid) {
 		return productDao.findByUUID(uuid);
 	}
 
-	@Override
 	@Transactional(readOnly = false)
 	public <T extends BaseEntity> void saveOrUpdate(T baseEntity) {
 		productDao.saveOrUpdate((Product)baseEntity);
 	}
 
-	@Override
 	@Transactional(readOnly = false)
 	public void delete(String uuid) {
 		Product product = productDao.findByUUID(uuid);
@@ -41,10 +37,13 @@ public class ProductServiceImpl implements ProductService {
         }
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<Product> findByCriteria(Criterion criterion) {
 		return productDao.findByCriteria(criterion);
 	}
 
-   
+	@SuppressWarnings("unchecked")
+	public List<Product> list() {
+		return productDao.list();
+	}
 }

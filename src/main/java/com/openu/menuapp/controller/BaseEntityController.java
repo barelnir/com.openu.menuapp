@@ -1,23 +1,9 @@
 package com.openu.menuapp.controller;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.openu.menuapp.entity.BaseEntity;
-import com.openu.menuapp.entity.Product;
-import com.openu.menuapp.service.BaseEntityService;
-
 
 public class BaseEntityController {
 
-	 /*@Autowired
+	/* @Autowired
     private BaseEntityService baseEntityService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -47,7 +33,7 @@ public class BaseEntityController {
 //    }
 
     @RequestMapping(value = "/edit/{uuid}", method = RequestMethod.GET)
-    public String updateBaseEntity(Model model, @PathVariable String uuid) {
+    public String updateBaseEntity(Model model, @PathVariable UUID uuid) {
         BaseEntity baseEntity = baseEntityService.findByUUID(uuid);
         model.addAttribute("baseEntity", baseEntity);
         return "update";
@@ -65,6 +51,6 @@ public class BaseEntityController {
 //        model.addAttribute("deleted", "success");
 //        model.addAttribute("product", new Product());
 //        return "index";
-//    }*/
-	
+//    }
+	*/
 }

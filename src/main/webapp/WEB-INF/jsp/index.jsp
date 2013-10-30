@@ -1,62 +1,50 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ include file="common/header.jsp" %>
 
 <div class="link">
-<h2>Create Product</h2>
-<c:if test="${saved == 'success'}">
-<p class="success">Product Created Successfully</p>
-</c:if>
-<c:if test="${deleted == 'success'}">
-<p class="success">Product Deleted Successfully</p>
-</c:if>
-<c:if test="${status == 'exist'}">
-<p class="error">Product Already Exist</p>
-</c:if>
-<form:form modelAttribute="product" action="/menuapp/create" method="post">
-<!--<form:label path="Uuid">Product Name</form:label><form:input path="Uuid" />-->
-<form:label path="productName">Name</form:label><form:input path="productName" />
-<form:label path="productPrice">Price</form:label><form:input path="productPrice" />
-<button type="submit" id="save">Save Product</button><button type="submit" id="search">Search Product</button>
-</form:form>
-</div>
+<h2>רשימת מסעדות</h2>
 
-<c:if test="${search == 'true'}">
+<c:if test="${saved == 'success'}">
+<p class="success">ההזמנה בוצעה בהצלחה</p>
+</c:if>
+
+<c:if test="${deleted == 'success'}">
+<p class="success">ההזמנה בוטלה בהצלחה</p>
+</c:if>
+
 <table>
+<c:if test="${empty restaurants}">
 <tr>
-<th>Product Id</th>
-<th>Product Name</th>
-<th>Product Price</th>
-<th colspan="2">Actions</th>
-</tr>
-<c:if test="${empty products}">
-<tr>
-<td colspan="4">No results found!</td>
+<td colspan="4">לא נמצאו מסעדות</td>
 </tr>
 </c:if>
-<c:forEach var="current" items="${products}">
+<c:forEach var="current" items="${restaurants}">
 <tr>
-<td>${current.productName}</td>
-<td>${current.productPrice}</td>
-<td><a href="/menuapp/edit/${current.Uuid}">Edit</a></td>
-<td><a href="/menuapp/delete/${current.Uuid}">Delete</a></td>
+	<td>
+		<table>
+			<tr>
+				<td rowspan="4">img</td>
+			</tr>
+			<tr>
+				<td>${current.name}</td>
+				<td>${current.address.city}</td>
+				<td>stars</td>
+			</tr>
+			<tr>
+				<td>type</td>
+				<td>minimum</td>
+				<td><a href="/menuapp/restaurant/${current.uuid}">menu</a></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>open hours</td>
+				<td><a href="www.facebook.com">share</a></td>
+			</tr>
+		</table>
+	</td>
 </tr>
 </c:forEach>
 </table>
-</c:if>
-
-<script type="text/javascript">
-
-$(function() {
-$("#save").click(function(event) {
-         $("#product").attr("action", "/menuapp/create")
-$("#product").submit();
-});
-
-$("#search").click(function(event) {
-         $("#product").attr("action", "/menuapp/search")
-$("#product").submit();
-
-});
-});
-</script>
+</div>
 
 <%@ include file="common/footer.jsp" %>

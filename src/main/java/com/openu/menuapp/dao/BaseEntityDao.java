@@ -12,4 +12,5 @@ public interface BaseEntityDao<E extends BaseEntity> {
     void delete(E e);
     E findByUUID(String uuid);
     List<E> findByCriteria(Criterion criterion);
+    List<E> list();
 }

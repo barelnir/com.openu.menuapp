@@ -16,35 +16,40 @@ import javax.persistence.Table;
 @Table (name = "addresses")
 public class Address extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5561682476304649267L;
+
 	@Column (nullable = false)
-	private String city;
-	
-	@Column (nullable = false)
-	private String street;
-	
-	@Column (nullable = false)
-	private int buildingNumber;
-	
-	@Column
-	private int apartmentNumber;
+	protected String city;
 	
 	@Column (nullable = false)
-	private String company;
+	protected String street;
+	
+	@Column (nullable = false)
+	protected int buildingNumber;
 	
 	@Column
-	private int floor;
+	protected int apartmentNumber;
+	
+	@Column (nullable = false)
+	protected String company;
 	
 	@Column
-	private String entrance;
+	protected int floor;
 	
 	@Column
-	private long zipCode;
+	protected String entrance;
+	
+	@Column
+	protected long zipCode;
 	
 	/**
 	 * Constructor
 	 */
 	public Address() {
-		super();
+		super("");
 	}
 
 	/**

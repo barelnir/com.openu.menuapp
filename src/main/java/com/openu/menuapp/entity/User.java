@@ -12,13 +12,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "users")
 public class User extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1891086337208998459L;
 
 	@Column (nullable = false)
 	protected String userName;
@@ -44,7 +48,7 @@ public class User extends BaseEntity {
 	 * Constructor
 	 */
 	public User() {
-		super();
+		super("");
 	}
 
 	/**

@@ -16,9 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = 8944787938499211012L;
-
 	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid2")
 	@Basic
 	protected String uuid;
 	
@@ -33,11 +32,6 @@ public class BaseEntity implements Serializable {
 	@Basic
 	protected String createdBy;
 	
-	public BaseEntity()
-	{
-		this("");
-	}
-
 	public BaseEntity(String createdBy)
 	{
 		setCreationTime(new Date());
@@ -100,6 +94,7 @@ public class BaseEntity implements Serializable {
 	private void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
+
 	
 	@Override
     public boolean equals(Object o) {

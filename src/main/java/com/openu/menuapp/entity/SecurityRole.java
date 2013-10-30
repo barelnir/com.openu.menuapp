@@ -16,14 +16,18 @@ import javax.persistence.Table;
 @Table (name = "security_roles")
 public class SecurityRole extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8810187207127121001L;
 	@Column
-	private String roleName;
+	protected String roleName;
 
 	/**
 	 * Constructor
 	 */
 	public SecurityRole() {
-		// TODO Auto-generated constructor stub
+		super("");
 	}
 
 	/**
