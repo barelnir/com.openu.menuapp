@@ -19,6 +19,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,13 +37,18 @@ public class Dish extends BaseEntity {
 	@Column (nullable = false)
 	protected double price;
 		
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "dishes_additional_options", joinColumns = { 
-			@JoinColumn(name = "dishes_uuid", nullable = false, updatable = false) }, 
-			inverseJoinColumns = { @JoinColumn(name = "additionalOptions_uuid", 
+			@JoinColumn(name = "dishes_uuid", referencedColumnName="uuid",
+					nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "additionalOptions_uuid", referencedColumnName="uuid",
 					nullable = false, updatable = false) })
 	protected Set<AdditionalOption> availableAdditionalOptions = new HashSet<AdditionalOption>();
-		
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "restaurant_uuid", nullable = false)
+	protected Restaurant restaurant;
+	
 	/**
 	 * Constructor
 	 */
@@ -56,13 +62,15 @@ public class Dish extends BaseEntity {
 	 * @param name
 	 * @param description
 	 * @param price
+	 * @param restaurant
 	 */
 	public Dish(String createdBy, String name, String description,
-			double price) {
+			double price, Restaurant restaurant) {
 		super(createdBy);
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.restaurant = restaurant;
 	}
 
 
@@ -128,6 +136,20 @@ public class Dish extends BaseEntity {
 	 */
 	public void addAdditionalOption(AdditionalOption additionalOption) {
 		this.availableAdditionalOptions.add(additionalOption);
+	}
+
+	/**
+	 * @return the restaurant
+	 */
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	/**
+	 * @param restaurant the restaurant to set
+	 */
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
 	

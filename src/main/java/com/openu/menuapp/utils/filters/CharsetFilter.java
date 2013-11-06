@@ -1,4 +1,4 @@
-package com.openu.menuapp.filters;
+package com.openu.menuapp.utils.filters;
 
 import javax.servlet.Filter;
 

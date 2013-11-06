@@ -26,19 +26,19 @@
 				<td rowspan="4">img</td>
 			</tr>
 			<tr>
+				<td>${current.uuid}</td>
 				<td>${current.name}</td>
-				<td>${current.address.city}</td>
-				<td>stars</td>
+				<td colspan="2">${current.address.city}</td>
+				
 			</tr>
 			<tr>
 				<td>type</td>
-				<td>minimum</td>
-				<td><a href="/menuapp/restaurant/${current.uuid}">menu</a></td>
+				<td colspan="2">open hours</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>open hours</td>
-				<td><a href="www.facebook.com">share</a></td>
+				<td>${current.kosher}</td>
+				<td>stars</td>
+				<td><a href="/menuapp/restaurant/${current.uuid}">לתפריט</a></td>
 			</tr>
 		</table>
 	</td>

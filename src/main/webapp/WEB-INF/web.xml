@@ -32,7 +32,7 @@
 
   	<filter>
 	    <filter-name>CharsetFilter</filter-name>
-	    <filter-class>com.openu.menuapp.filters.CharsetFilter</filter-class>
+	    <filter-class>com.openu.menuapp.utils.filters.CharsetFilter</filter-class>
 	      <init-param>
 	        <param-name>requestEncoding</param-name>
 	        <param-value>UTF-8</param-value>

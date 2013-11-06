@@ -8,7 +8,10 @@
  */
 package com.openu.menuapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.openu.menuapp.entity.Dish;
 import com.openu.menuapp.entity.Restaurant;
 import com.openu.menuapp.service.RestaurantService;
 
@@ -28,11 +32,16 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
 	 @RequestMapping(value = "/{uuid}", method = RequestMethod.GET)
-	 public String update(Model model, @PathVariable String uuid) {
+	 public String loadRestaurantPage(Model model, HttpServletRequest request, @PathVariable String uuid) {
 	        Restaurant resturant = restaurantService.findByUUID(uuid);
-	        model.addAttribute("resturant", resturant);
-	        model.addAttribute("dishes",resturant.getDishes());
-	        return "resturant";
+	        model.addAttribute("restaurant", resturant);
+	        List<Dish> dishes = new ArrayList<Dish>(resturant.getDishes());
+	        model.addAttribute("dishes",dishes);
+	        if ( request.getQueryString() != null && request.getQueryString().equals("saved=success"))
+	        {
+	        	model.addAttribute("saved", "success");
+	        }
+	        return "restaurant";
 	 }
 
 }

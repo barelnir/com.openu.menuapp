@@ -5,6 +5,7 @@ import com.openu.menuapp.entity.BaseEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
@@ -49,7 +50,9 @@ public abstract class BaseEntityDaoImpl<E extends BaseEntity> implements BaseEnt
 	
 	@SuppressWarnings("unchecked")
 	public List<E> list() {
-        return getCurrentSession().createCriteria(entityClass).list();
+		Criteria criteria = getCurrentSession().createCriteria(entityClass);
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
     }
 	
 }

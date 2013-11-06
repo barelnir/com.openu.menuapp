@@ -40,7 +40,16 @@ public class Order extends BaseEntity {
 	@Column (nullable = false)
 	protected boolean status;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@OneToOne(cascade = {CascadeType.ALL})
+    //@JoinColumn(name = "restaurant_uuid", referencedColumnName="uuid")
+	//protected Restaurant restaurant;
+	
+	@OneToOne
+    @JoinColumn(name = "dish_uuid", referencedColumnName="uuid")
+	protected Dish dish;
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "orders_additional_options", joinColumns = { 
 			@JoinColumn(name = "orders_uuid", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "additionalOptions_uuid", 
@@ -54,6 +63,15 @@ public class Order extends BaseEntity {
 		super("");
 	}
 
+	/**
+	 * Constructor
+	 * @param dish
+	 */
+	public Order(Dish dish) {
+		super("");
+		this.dish = dish;
+	}
+	
 	/**
 	 * Constructor
 	 * @param createdBy
@@ -88,6 +106,105 @@ public class Order extends BaseEntity {
 	 */
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the deliveryTime
+	 */
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	/**
+	 * @param deliveryTime the deliveryTime to set
+	 */
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+
+	/**
+	 * @return the deliveryAddress
+	 */
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	/**
+	 * @param deliveryAddress the deliveryAddress to set
+	 */
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public boolean isStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the restaurant
+	 */
+	//public Restaurant getRestaurant() {
+	//	return restaurant;
+	//}
+
+	/**
+	 * @param restaurant the restaurant to set
+	 */
+	//public void setRestaurant(Restaurant restaurant) {
+	//	this.restaurant = restaurant;
+	//}
+
+	/**
+	 * @return the dish
+	 */
+	public Dish getDish() {
+		return dish;
+	}
+
+	/**
+	 * @param dish the dish to set
+	 */
+	public void setDish(Dish dish) {
+		this.dish = dish;
+	}
+
+	/**
+	 * @return the selectedAdditionalOptions
+	 */
+	public Set<AdditionalOption> getSelectedAdditionalOptions() {
+		return selectedAdditionalOptions;
+	}
+
+	/**
+	 * @param selectedAdditionalOptions the selectedAdditionalOptions to set
+	 */
+	public void setSelectedAdditionalOptions(
+			Set<AdditionalOption> selectedAdditionalOptions) {
+		this.selectedAdditionalOptions = selectedAdditionalOptions;
 	}
 	
 	

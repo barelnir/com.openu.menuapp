@@ -11,6 +11,10 @@ package com.openu.menuapp.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +24,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.openu.menuapp.entity.AdditionalOption;
 import com.openu.menuapp.entity.Address;
 import com.openu.menuapp.entity.Dish;
+import com.openu.menuapp.entity.Order;
 import com.openu.menuapp.entity.Restaurant;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/applicationContext.xml", "classpath:spring/hibernateContext.xml"})
-public class RestaurantServiceTest {
+public class OrderServiceTest {
 
+	@Autowired
+	private OrderService orderService;
+	
 	@Autowired
     private RestaurantService restaurantService;
 	
@@ -38,7 +46,7 @@ public class RestaurantServiceTest {
 	@Test
     public void testSave() throws Exception {
     	String uuid = createObject();
-        Restaurant found = restaurantService.findByUUID(uuid);
+        Order found = orderService.findByUUID(uuid);
         assertEquals(uuid, found.getUuid());
     }
 
@@ -47,7 +55,12 @@ public class RestaurantServiceTest {
     private String createObject() {
     	try
     	{
-	    	Restaurant restaurant = new Restaurant("","La Gardia",new Address("","Tel Aviv666666","Main",6,4,"CP",5,"2",323232),"054-23325654","nir",true);
+	    	Order order = new Order();
+	    	order.setDeliveryTime(new Date());
+    		order.setDeliveryAddress(new Address("","Tel Aviv666666","Main",6,4,"CP",5,"2",323232));
+	    	orderService.saveOrUpdate(order);
+	    	
+    		Restaurant restaurant = new Restaurant("","La Gardia",new Address("","Tel Aviv666666","Main",6,4,"CP",5,"2",323232),"054-23325654","nir",true);
 	        restaurantService.saveOrUpdate(restaurant);
 
 	        Dish dish = new Dish("","havita","nice",50,restaurant);
@@ -79,14 +92,19 @@ public class RestaurantServiceTest {
 	        dishService.saveOrUpdate(dish);
 	        dishService.saveOrUpdate(dish2);
 	        dishService.saveOrUpdate(dish3);
-	        
-	        
+	        	        
 	        restaurant.addDish(dish);
 	        restaurant.addDish(dish2);
 	        restaurant.addDish(dish3);
 	        restaurantService.saveOrUpdate(restaurant);
 
-	        return restaurant.getUuid();
+	        order.setDish(dish);
+	        Set<AdditionalOption> selectedAdditionalOptions = new HashSet<AdditionalOption>();
+	        selectedAdditionalOptions.add(adOpt2);
+	        order.setSelectedAdditionalOptions(selectedAdditionalOptions);
+	        orderService.saveOrUpdate(order);
+	        
+	        return order.getUuid();
 	    }
     	catch (Exception ex)
     	{
@@ -98,20 +116,20 @@ public class RestaurantServiceTest {
     @Test
     public void testDelete() throws Exception {
     	String uuid = createObject();
-        assertNotNull(restaurantService.findByUUID(uuid));
-        restaurantService.delete(uuid);
+        assertNotNull(orderService.findByUUID(uuid));
+        orderService.delete(uuid);
     }
 
     @Test
     public void testUpdate() throws Exception {
     	String uuid = createObject();
-    	Restaurant obj = restaurantService.findByUUID(uuid);
+    	Order obj = orderService.findByUUID(uuid);
         assertNotNull(obj);
-        obj.setName("newUserName");
-        restaurantService.saveOrUpdate(obj);
+        obj.setComments("newUserName");
+        orderService.saveOrUpdate(obj);
 
-        Restaurant found = restaurantService.findByUUID(uuid);
+        Order found = orderService.findByUUID(uuid);
         assertNotNull(found);
-        assertEquals("newUserName", found.getName());
+        assertEquals("newUserName", found.getComments());
     }
 }

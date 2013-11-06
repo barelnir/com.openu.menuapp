@@ -98,10 +98,11 @@ ul li:hover ul {
 <div class="header">
 <h1>MenuApp</h1>
 <ul>
-  <li>הזמנות</li>
+  <li><a href="/menuapp/">מסעדות</a></li>
   <li>דוחות</li>
   <li>סטטוס</li>
   <li>צור קשר</li>
+  <li><a href="/menuapp/admin/">מנהל</a></li>
 </ul>
 
 </div>

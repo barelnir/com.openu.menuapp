@@ -11,14 +11,15 @@ package com.openu.menuapp.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table (name = "restaurants")
@@ -29,7 +30,8 @@ public class Restaurant extends BaseEntity {
 	@Column (nullable = false)
 	protected String name;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne()
+	@Cascade({CascadeType.ALL})
     @JoinColumn(name = "address_uuid", referencedColumnName="uuid")
 	protected Address address;
 	
@@ -42,13 +44,9 @@ public class Restaurant extends BaseEntity {
 	@Column (nullable = false)
 	protected boolean kosher;
 
-	@OneToMany
-    @JoinTable(
-            name="resturant_dishes",
-            joinColumns = @JoinColumn( name="resturant_uuid"),
-            inverseJoinColumns = @JoinColumn( name="dish_uuid")
-    )
-	protected Set<Dish> dishes;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant", orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
+	protected Set<Dish> dishes = new HashSet<Dish>();
 	
 	/**
 	 * Constructor
@@ -74,7 +72,6 @@ public class Restaurant extends BaseEntity {
 		this.phone = phone;
 		this.managerName = managerName;
 		this.kosher = kosher;
-		dishes = new HashSet<Dish>();
 	}
 
 	/**
@@ -165,10 +162,9 @@ public class Restaurant extends BaseEntity {
 	 * @param dish the dish to add
 	 */
 	public void addDish(Dish dish) {
-		if ( this.dishes == null)
-		{
-			dishes = new HashSet<Dish>();
-		}
 		this.dishes.add(dish);
 	}
+	
+	
+	
 }

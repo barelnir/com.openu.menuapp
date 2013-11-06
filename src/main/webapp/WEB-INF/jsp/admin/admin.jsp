@@ -6,8 +6,7 @@
 <h2>מערכת ניהול</h2>
 
 <table>
-<tr>
-	<td>
+	<tr>
 		<td><a href="/menuapp/admin/restaurants">ניהול מסעדות</a></td>
 	</tr>
 </table>

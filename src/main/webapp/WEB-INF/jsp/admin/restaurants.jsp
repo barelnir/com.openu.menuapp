@@ -6,7 +6,7 @@
 <h2>מערכת ניהול - מסעדות</h2>
 
 <c:if test="${saved == 'success'}">
-<p class="success">ההזמנה בוצעה בהצלחה</p>
+<p class="success">המסעדה נוספה בהצלחה</p>
 </c:if>
 
 <c:if test="${deleted == 'success'}">
@@ -14,6 +14,9 @@
 </c:if>
 
 <table>
+<tr>
+	<td colspan="6"><a href="/menuapp/admin/restaurant/add">הוסף</a></td>
+</tr>
 <c:if test="${empty restaurants}">
 <tr>
 <td colspan="4">לא נמצאו מסעדות</td>
@@ -24,9 +27,9 @@
 	<td>img</td>
 	<td>${current.name}</td>
 	<td>${current.address.city}</td>
-	<td><a href="/menuapp/admin/restaurants/view/${current.uuid}">צפה</a></td>
-	<td><a href="/menuapp/admin/restaurants/edit/${current.uuid}">ערוך</a></td>
-	<td><a href="/menuapp/admin/restaurants/delete/${current.uuid}">מחק</a></td>
+	<td><a href="/menuapp/admin/restaurant/${current.uuid}">צפה</a></td>
+	<td><a href="/menuapp/admin/restaurant/edit/${current.uuid}">ערוך</a></td>
+	<td><a href="/menuapp/admin/restaurant/delete/${current.uuid}">מחק</a></td>
 </tr>
 </c:forEach>
 </table>
